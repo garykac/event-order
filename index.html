@@ -1,0 +1,143 @@
+<!doctype html><html lang="en">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <title>UI Event Order </title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="WD" name="w3c-status">
+  <link href="../default.css" rel="stylesheet" type="text/css">
+  <link href="../csslogo.ico" rel="shortcut icon" type="image/x-icon">
+  <link href="styles.css" rel="stylesheet" type="text/css">
+  <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-WD" rel="stylesheet" type="text/css">
+  <meta content="Bikeshed 1.0.0" name="generator">
+ <body class="h-entry">
+  <div class="head">
+   <header>
+    <p data-fill-with="logo"><a href="http://www.w3.org/"><img alt="W3C" height="48" src="https://www.w3.org/Icons/w3c_home" width="72"></a></p>
+    <h1 class="p-name no-ref" id="title">UI Event Order </h1>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">W3C Working Draft, <time class="dt-updated" datetime="2016-09-21">21 September 2016</time></span></h2>
+   </header>
+   <div data-fill-with="spec-metadata">
+    <dl>
+     <dt>This version:
+     <dd><a class="u-url" href="http://www.w3.org/TR/2016/WD-event-order--20160921/">http://www.w3.org/TR/2016/WD-event-order--20160921/</a>
+     <dt>Latest version:
+     <dd><a href="http://www.w3.org/TR/eventorder/">http://www.w3.org/TR/eventorder/</a>
+     <dt>Editor's Draft:
+     <dd><a href="https://github.com/w3c/eventorder/">https://github.com/w3c/eventorder/</a>
+     <dt>Previous Versions:
+     <dd><a href="" rel="previous"></a>
+     <dd><a href="<none>" rel="previous">&lt;none></a>
+     <dt>Issue Tracking:
+     <dd><a href="https://github.com/garykac/event-order/issues/">GitHub</a>
+     <dt class="editor">Editor:
+     <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:garykac@google.com">Gary Kacmarcik</a> (<span class="p-org org">Google</span>)
+    </dl>
+   </div>
+   <div data-fill-with="warning"></div>
+   <p class="copyright" data-fill-with="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2016 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply. </p>
+   <hr title="Separator for header">
+  </div>
+  <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
+  <div class="p-summary" data-fill-with="abstract">
+   <p>This specification defines the order in which various <a data-link-type="biblio" href="#biblio-uievents">[UIEvents]</a> should
+
+fire.</p>
+  </div>
+  <h2 class="no-num no-toc no-ref heading settled" id="status"><span class="content">Status of this document</span></h2>
+  <div data-fill-with="status">
+   <p> <em>This section describes the status of this document at the time of its publication. Other
+    documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision of this
+    technical report can be found in the <a href="http://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical
+    reports index</a> at http://www.w3.org/TR/.</em> </p>
+   <p> The management and production of this document follows a relatively complex setup. Details are
+    provided as part of the introduction. </p>
+   <p> This document was published by the <a href="https://www.w3.org/WebPlatform/WG/">Web Platform Working Group</a> as a Working Draft.
+
+    Feedback and comments on this specification are welcome. Please use <a href="https://github.com/w3c/event-order/issues">Github issues</a> Historical discussions can be found in the <a href="http://lists.w3.org/Archives/Public/public-webapps/">public-webapps@w3.org archives</a>. </p>
+   <p> Publication as a Working Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr> Membership. This is a draft document and may
+    be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite
+    this document as other than work in progress. </p>
+   <p> This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="http://www.w3.org/2004/01/pp-impl/40318/status" rel="disclosure">public list of any
+    patent disclosures</a> made in connection with the deliverables of the group; that page also
+    includes instructions for disclosing a patent. An individual who has actual knowledge of a
+    patent which the individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+    Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. </p>
+   <p> This document is governed by the <a href="http://www.w3.org/2015/Process-20150901/" id="w3c_process_revision">1 September 2015 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>. </p>
+   <p></p>
+  </div>
+  <div data-fill-with="at-risk"></div>
+  <nav data-fill-with="table-of-contents" id="toc">
+   <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
+   <ol class="toc" role="directory">
+    <li><a href="#introduction"><span class="secno">1</span> <span class="content">Introduction</span></a>
+    <li><a href="#event-order"><span class="secno">2</span> <span class="content">Event Order</span></a>
+    <li><a href="#acknowledgements-contributors"><span class="secno">3</span> <span class="content">Acknowledgements</span></a>
+    <li>
+     <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
+     <ol class="toc">
+      <li><a href="#informative"><span class="secno"></span> <span class="content">Informative References</span></a>
+     </ol>
+   </ol>
+  </nav>
+  <main>
+   <h2 class="heading settled" data-level="1" id="introduction"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#introduction"></a></h2>
+   <p>A canonical list of event order so that this info isn’t split across
+	multiple specifications.</p>
+   <h2 class="heading settled" data-level="2" id="event-order"><span class="secno">2. </span><span class="content">Event Order</span><a class="self-link" href="#event-order"></a></h2>
+   <p>Shifting focus from element A to element B</p>
+   <ul>
+    <li data-md="">
+     <p>focusout - Sent before element A loses focus</p>
+    <li data-md="">
+     <p>focusin - Sent before element B receives focus</p>
+    <li data-md="">
+     <p>blur - Sent after element A loses focus</p>
+    <li data-md="">
+     <p>focus - Sent after element B receives focus</p>
+    <li data-md="">
+     <p>mousemove</p>
+    <li data-md="">
+     <p>mouseout</p>
+    <li data-md="">
+     <p>mouseleave</p>
+    <li data-md="">
+     <p>mouseover</p>
+    <li data-md="">
+     <p>mouseenter</p>
+    <li data-md="">
+     <p>mousedown</p>
+    <li data-md="">
+     <p>mouseup</p>
+    <li data-md="">
+     <p>click</p>
+    <li data-md="">
+     <p>dblclick</p>
+    <li data-md="">
+     <p>keydown</p>
+    <li data-md="">
+     <p>compositionstart</p>
+    <li data-md="">
+     <p>beforeinput</p>
+    <li data-md="">
+     <p>compositionupdate</p>
+    <li data-md="">
+     <p>input</p>
+    <li data-md="">
+     <p>compositionend</p>
+    <li data-md="">
+     <p>keyup</p>
+   </ul>
+   <h2 class="heading settled" data-level="3" id="acknowledgements-contributors"><span class="secno">3. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements-contributors"></a></h2>
+   <p>Thanks to the following people for the discussions that lead to the creation
+	of this proposal:</p>
+   <p>Gary Kacmarcik (Google),
+	Johannes Wilm (Fidus),
+	Chong Zhang (Google)</p>
+  </main>
+<script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script>
+  <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
+  <dl>
+   <dt id="biblio-uievents"><a class="self-link" href="#biblio-uievents"></a>[UIEVENTS]
+   <dd>Gary Kacmarcik; Travis Leithead. <a href="http://www.w3.org/TR/uievents/">UI Events Specification</a>. 15 December 2015. WD. URL: <a href="http://www.w3.org/TR/uievents/">http://www.w3.org/TR/uievents/</a>
+  </dl>

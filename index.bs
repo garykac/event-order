@@ -1,0 +1,62 @@
+<h1>UI Event Order</h1>
+
+<pre class="metadata">
+Shortname: event-order
+Level:
+Group: uievents
+Status: WD
+TR: http://www.w3.org/TR/eventorder/
+ED: https://github.com/w3c/eventorder/
+Repository: garykac/event-order
+Previous Version:
+	<none>
+Editor: Gary Kacmarcik, Google, garykac@google.com
+Abstract:
+	This specification defines the order in which various [[UIEvents]] should
+	fire.
+</pre>
+
+<h2 id="introduction">Introduction</h2>
+
+	A canonical list of event order so that this info isn't split across
+	multiple specifications.
+
+<h2 id="event-order">Event Order</h3>
+
+	Shifting focus from element A to element B
+
+	* focusout - Sent before element A loses focus
+	* focusin - Sent before element B receives focus
+	* blur - Sent after element A loses focus
+	* focus - Sent after element B receives focus
+
+	* mousemove
+	* mouseout
+	* mouseleave
+	* mouseover
+	* mouseenter
+
+	* mousedown
+	* mouseup
+	* click
+	* dblclick
+
+	* keydown
+	* compositionstart
+
+	* beforeinput
+	* compositionupdate
+	* input
+
+	* compositionend
+	* keyup
+
+
+<h2 id="acknowledgements-contributors">Acknowledgements</h2>
+
+	Thanks to the following people for the discussions that lead to the creation
+	of this proposal:
+
+	Gary Kacmarcik (Google),
+	Johannes Wilm (Fidus),
+	Chong Zhang (Google)
